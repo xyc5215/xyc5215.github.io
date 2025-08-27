@@ -1,1 +1,921 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简介 | xyc5215</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --md-primary: #6750A4;
+            --md-on-primary: #FFFFFF;
+            --md-primary-container: #EADDFF;
+            --md-on-primary-container: #21005D;
+            --md-secondary: #625B71;
+            --md-on-secondary: #FFFFFF;
+            --md-background: #FFFBFE;
+            --md-on-background: #1C1B1F;
+            --md-surface: #FFFBFE;
+            --md-on-surface: #1C1B1F;
+            --md-surface-variant: #E7E0EC;
+            --md-on-surface-variant: #49454F;
+            --md-outline: #79747E;
+            --md-shadow: #000000;
+            
+            --mc-green: #1cb63c; /* Minecraft绿色 */
+            --mc-dark-green: #0e8c2a;
+            --mc-brown: #8D6E63;
+            --mc-dark-brown: #5D4037;
+            --mc-blue: #1A73E8;
+            
+            --transition-speed: 0.3s;
+        }
 
+        .minecraft-theme {
+            --md-primary: #1cb63c; /* 使用您指定的绿色 */
+            --md-on-primary: #FFFFFF;
+            --md-primary-container: #a0e8b0;
+            --md-on-primary-container: #0e8c2a;
+            --md-secondary: #8D6E63;
+            --md-on-secondary: #FFFFFF;
+            --md-background: #F5F5F5;
+            --md-on-background: #212121;
+            --md-surface: #FFFFFF;
+            --md-on-surface: #212121;
+            --md-surface-variant: #E7E0EC;
+            --md-on-surface-variant: #49454F;
+            --md-outline: #79747E;
+            --md-shadow: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--md-background);
+            color: var(--md-on-background);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: all 0.5s ease;
+        }
+
+        /* 导航栏 */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--md-surface);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all var(--transition-speed);
+        }
+
+        .header.scrolled {
+            padding: 0.5rem 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--md-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--md-on-surface);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color var(--transition-speed);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--md-primary);
+            transition: width var(--transition-speed);
+        }
+
+        .nav-links a:hover {
+            color: var(--md-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* 主内容区域 */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+
+        /* 英雄区域 */
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+            justify-content: center;
+            gap: 4rem;
+        }
+
+        .hero-avatar {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .avatar-container {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(103, 80, 164, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--md-primary), var(--md-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--md-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-speed);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--md-primary);
+            color: var(--md-on-primary);
+            box-shadow: 0 2px 8px rgba(103, 80, 164, 0.3);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #5a4793;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(103, 80, 164, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--md-primary);
+            border: 1px solid var(--md-outline);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(103, 80, 164, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* 章节样式 */
+        .section {
+            margin: 6rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--md-primary), var(--md-secondary));
+            border-radius: 2px;
+        }
+
+        /* 时间线 */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--md-primary-container);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--md-surface);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform var(--transition-speed);
+            position: relative;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--md-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--md-primary-container);
+            color: var(--md-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* 技能部分 */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background-color: var(--md-surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--md-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill {
+            background-color: var(--md-primary-container);
+            color: var(--md-on-primary-container);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: transform var(--transition-speed);
+            font-size: 0.9rem;
+        }
+
+        .skill:hover {
+            transform: scale(1.05);
+        }
+
+        /* Minecraft 提示 */
+        .minecraft-hint {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: var(--md-surface-variant);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .minecraft-text {
+            color: var(--md-primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        /* 联系区域 */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--md-primary-container);
+            color: var(--md-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .minecraft-theme .contact-icon {
+            background-color: white;
+            color: var(--md-primary);
+        }
+
+        .contact-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-text p {
+            color: var(--md-on-surface-variant);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-weight: 500;
+        }
+
+        .form-input, .form-textarea {
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--md-outline);
+            font-family: inherit;
+            transition: border-color var(--transition-speed);
+            width: 100%;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--md-primary);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* 页脚 */
+        .footer {
+            background-color: var(--md-primary);
+            color: var(--md-on-primary);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 6rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--md-on-primary);
+            text-decoration: none;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .avatar-container {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">xyc5215</div>
+            <ul class="nav-links">
+                <li><a href="#about">关于我</a></li>
+                <li><a href="#timeline">学习历程</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li><a href="#contact">联系我</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 主内容 -->
+    <main class="main">
+        <!-- 英雄区域 -->
+        <section class="hero" id="about">
+            <div class="hero-avatar">
+                <div class="avatar-container">
+                    <img src="avatar.png" alt="头像" class="avatar-img">
+                </div>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">xyc5215</h1>
+                <p class="hero-subtitle">编程爱好者 & Minecraft 玩家</p>
+                <div class="hero-desc">
+                    <p>自2020年开始接触编程，从Scratch入门，逐步学习Python、前端开发和APP开发。</p>
+                    <p>2025年8月入驻GitHub，开始参与开源项目并展示个人作品。</p>
+                    <p>同时也是一名忠实的<span class="minecraft-text" data-mc>Minecraft</span>爱好者，喜欢在虚拟世界中创造和探索。</p>
+                </div>
+                <div class="hero-cta">
+                    <a href="#timeline" class="btn btn-primary">
+                        <span class="material-icons">auto_awesome</span>
+                        查看历程
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span class="material-icons">mail</span>
+                        联系我
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 时间线 -->
+        <section id="timeline" class="section">
+            <h2 class="section-title">编程学习时间线</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020</div>
+                        <h3 class="timeline-title">开始接触编程</h3>
+                        <p>通过Scratch可视化编程入门，学习编程基础逻辑和思维。</p>
+                        <div class="timeline-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2021</div>
+                        <h3 class="timeline-title">自学编程</h3>
+                        <p>深入学习Scratch，开始学习Python语言基础，了解文本编程。</p>
+                        <div class="timeline-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022</div>
+                        <h3 class="timeline-title">网页编程</h3>
+                        <p>学习HTML、CSS和JavaScript，开始创建网页和简单的Web应用。</p>
+                        <div class="timeline-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023</div>
+                        <h3 class="timeline-title">广播纪元</h3>
+                        <p>开始向外界展示编程作品，提高Python和前端开发技能，参与更多项目。</p>
+                        <div class="timeline-icon">
+                            <i class="fas fa-broadcast-tower"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024</div>
+                        <h3 class="timeline-title">APP开发</h3>
+                        <p>使用Python、iApp和裕语言v3进行APP开发，拓展移动端开发技能。</p>
+                        <div class="timeline-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025</div>
+                        <h3 class="timeline-title">全面发展</h3>
+                        <p>深入研究Python、前端开发和APP开发，入驻GitHub，参与开源项目。</p>
+                        <div class="timeline-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技能 -->
+        <section id="skills" class="section">
+            <h2 class="section-title">技能与专长</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3 class="skill-title">
+                        <i class="fas fa-code"></i>
+                        编程语言
+                    </h3>
+                    <div class="skill-list">
+                        <span class="skill">Python</span>
+                        <span class="skill">JavaScript</span>
+                        <span class="skill">HTML/CSS</span>
+                        <span class="skill">裕语言</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-title">
+                        <i class="fas fa-laptop"></i>
+                        前端开发
+                    </h3>
+                    <div class="skill-list">
+                        <span class="skill">响应式设计</span>
+                        <span class="skill">UI/UX</span>
+                        <span class="skill">交互设计</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-title">
+                        <i class="fas fa-mobile-alt"></i>
+                        APP开发
+                    </h3>
+                    <div class="skill-list">
+                        <span class="skill">iApp</span>
+                        <span class="skill">裕语言v3</span>
+                        <span class="skill">Python应用</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-title">
+                        <i class="fas fa-gamepad"></i>
+                        其他技能
+                    </h3>
+                    <div class="skill-list">
+                        <span class="skill">Scratch</span>
+                        <span class="skill minecraft-text" data-mc>Minecraft</span>
+                        <span class="skill">开源项目</span>
+                    </div>
+                </div>
+            </div>
+            <div class="minecraft-hint">
+                <p>提示：将鼠标悬停在含有 <span class="minecraft-text" data-mc>Minecraft</span> 字样的文本上，可以切换到Minecraft主题风格！</p>
+            </div>
+        </section>
+
+        <!-- 联系 -->
+        <section id="contact" class="section">
+            <h2 class="section-title">联系我</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>姓名</h3>
+                            <p>xyc5215</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>GitHub</h3>
+                            <p>自2025.08入驻</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>兴趣爱好</h3>
+                            <p>编程、<span class="minecraft-text" data-mc>Minecraft</span></p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name" class="form-label">姓名</label>
+                        <input type="text" id="name" class="form-input" placeholder="请输入您的姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">邮箱</label>
+                        <input type="email" id="email" class="form-input" placeholder="请输入您的邮箱" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="form-label">消息</label>
+                        <textarea id="message" class="form-textarea" placeholder="请输入您的消息" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">发送消息</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="#" class="social-link">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i class="fab fa-python"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i class="fab fa-html5"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i class="fas fa-cube"></i>
+            </a>
+        </div>
+        <p>© 2025 xyc5215. 保留所有权利。</p>
+        <p>自2020年开始编程之旅 | 游戏<span class="minecraft-text" data-mc>Minecraft</span>爱好者</p>
+    </footer>
+
+    <script>
+        // 滚动效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('.header');
+            const sections = document.querySelectorAll('.section');
+            
+            // 导航栏滚动效果
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                // 章节显示效果
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const triggerBottom = window.innerHeight * 0.8;
+                    
+                    if (sectionTop < triggerBottom) {
+                        section.classList.add('visible');
+                    }
+                });
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // 初始化显示首屏元素
+            setTimeout(() => {
+                document.querySelector('.hero').style.opacity = 1;
+                document.querySelector('.hero').style.transform = 'translateY(0)';
+            }, 100);
+            
+            // Minecraft主题切换
+            const minecraftElements = document.querySelectorAll('.minecraft-text');
+            let minecraftThemeTimeout;
+            
+            minecraftElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    // 清除之前的超时
+                    clearTimeout(minecraftThemeTimeout);
+                    // 添加Minecraft主题
+                    document.body.classList.add('minecraft-theme');
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    // 设置延迟以允许用户在不同元素间移动
+                    minecraftThemeTimeout = setTimeout(() => {
+                        document.body.classList.remove('minecraft-theme');
+                    }, 300);
+                });
+                
+                // 防止在元素间移动时闪烁
+                element.addEventListener('mousemove', function() {
+                    clearTimeout(minecraftThemeTimeout);
+                });
+            });
+            
+            // 防止在Minecraft元素间移动时主题切换
+            document.addEventListener('mousemove', function(e) {
+                if (e.target.closest('.minecraft-text')) {
+                    clearTimeout(minecraftThemeTimeout);
+                }
+            });
+
+            // 表单提交处理
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                // 调用系统邮箱发送邮件
+                window.location.href = `mailto:your-email@example.com?subject=来自${name}的联系&body=${message}%0D%0A%0D%0A回复邮箱: ${email}`;
+                
+                // 重置表单
+                contactForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
